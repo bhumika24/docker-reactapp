@@ -1,0 +1,17 @@
+steps:
+  # Step 1: Build the React application using the Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/ardent-iris-389305/docker-reactapp'
+      - '.'
+
+  # Step 2: Push the built Docker image to Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/ardent-iris-389305/docker-reactapp'
+
+# Optionally, you can specify a timeout for the build (in seconds)
+timeout: '1200s'
