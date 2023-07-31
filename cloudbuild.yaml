@@ -13,7 +13,7 @@ steps:
       - 'push'
       - 'gcr.io/ardent-iris-389305/docker-reactapp'
   - logsBucket: 'gs://logs-codebuild-$ardent-iris-389305/$895e7a0d'
-options:
+ options:
   logging: GCS_ONLY
 
 
