@@ -12,6 +12,10 @@ steps:
     args:
       - 'push'
       - 'gcr.io/ardent-iris-389305/docker-reactapp'
+   logsBucket: 'gs://logs-codebuild-$PROJECT_ID/$BUILD_ID'
+options:
+  logging: GCS_ONLY
+
 
 # Optionally, you can specify a timeout for the build (in seconds)
 timeout: '1200s'
