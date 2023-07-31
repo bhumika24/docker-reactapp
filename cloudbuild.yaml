@@ -10,3 +10,5 @@ steps:
     args:
       - push
       - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+options:
+  logsBucket: codebuild
