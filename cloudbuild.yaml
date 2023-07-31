@@ -1,11 +1,12 @@
+---
 steps:
-  # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage', 
-           '.']
-
-  # Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 
-           'me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage']
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
