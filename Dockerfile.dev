@@ -1,4 +1,4 @@
-FROM mukeshravi/datahub_images:fe_image_latest
+FROM node:16-alpine as builder
 
 WORKDIR '/app'
 
