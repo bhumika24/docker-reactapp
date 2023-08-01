@@ -3,11 +3,11 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - pull
-      - mukeshravi/datahub_images:fe_image_latest
+      - https://hub.docker.com/layers/mukeshravi/datahub_images:fe_image_latest
   - name: gcr.io/cloud-builders/docker
     args:
       - run
-      - mukeshravi/datahub_images:fe_image_latest
+      - https://hub.docker.com/layers/mukeshravi/datahub_images:fe_image_latest
 options:
   logging: NONE
 
