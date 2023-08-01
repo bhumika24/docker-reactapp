@@ -4,11 +4,11 @@ steps:
     args:
       - build
       - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/frontend
       - .
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/frontend
 options:
  logging: NONE
