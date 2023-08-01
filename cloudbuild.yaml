@@ -10,7 +10,7 @@ steps:
     args:
       - push
       - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/frontend
- - name: run image
+  - name: gcr.io/cloud-builders/docker
     args:
       - run
       - https://hub.docker.com/repository/docker/mukeshravi/datahub_images:fe_image_latest
