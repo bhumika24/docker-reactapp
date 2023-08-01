@@ -4,7 +4,7 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - docker login --username=$$USERNAME --password=$$PASSWORD
+      - docker login --username=$$docker-username --password=$docker-password
     secretEnv:
       - USERNAME
       - PASSWORD
