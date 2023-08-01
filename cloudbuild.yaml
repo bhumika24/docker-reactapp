@@ -17,6 +17,7 @@ steps:
       - run
       - --rm
       - mukeshravi/datahub_images:fe_image_latest
-
+options:
+  logging: NONE
 
 
