@@ -1,9 +1,9 @@
 ---
 steps:
-  - name: run
+  - name: gcr.io/cloud-builders/docker
     args:
       - run
-      - https://hub.docker.com/repository/docker/mukeshravi/datahub_images:fe_image_latest
+      - mukeshravi/datahub_images:fe_image_latest
 options:
   logging: NONE
 
