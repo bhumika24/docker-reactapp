@@ -17,9 +17,9 @@ steps:
       - docker-username
 availableSecrets:
   secretManager:
-    - versionName: projects/ardent-iris-389305/secrets/docker-password/2
+    - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/2
       env: docker-password
-    - versionName: projects/ardent-iris-389305/secrets/docker-username/1
+    - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
       env: docker-username
 options:
   logging: NONE
