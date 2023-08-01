@@ -10,5 +10,8 @@ steps:
     args:
       - push
       - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/frontend
+    images: null
+  - gcr.io/$ardent-iris-389305/mukeshravi/datahub_images:fe_image_latest
 options:
- logging: NONE
+  logging: NONE
+
