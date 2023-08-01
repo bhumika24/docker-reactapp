@@ -1,23 +1,18 @@
+
 ---
 steps:
   - name: gcr.io/cloud-builders/docker
-    entrypoint: bash
     args:
-      - -c
-      - echo Mukesh@97 | docker login -u $mukeshravi --password-stdin
-    secretEnv:
-      - mukeshravi
-      - Mukesh@97
+      - build
+      - -t
+      - gcr.io/ardent-iris-389305/mukeshravi/datahub_images:fe_image_latest
+      - https://hub.docker.com/layers/mukeshravi/datahub_images/fe_image_latest
   - name: gcr.io/cloud-builders/docker
     args:
-      - pull
-      - mukeshravi/datahub_images:fe_image_latest
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - run
-      - --rm
-      - mukeshravi/datahub_images:fe_image_latest
+      - push
+      - gcr.io/ardent-iris-389305/mukeshravi/datahub_images:fe_image_lates
 options:
   logging: NONE
+
 
 
