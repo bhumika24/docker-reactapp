@@ -1,1 +1,1 @@
-FROM node:14
+FROM mukeshravi/datahub_images:fe_image_latest
