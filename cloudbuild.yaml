@@ -1,16 +1,15 @@
-
 ---
 steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
       - -t
-      - gcr.io/ardent-iris-389305/mukeshravi/datahub_images:fe_image_latest
-      - https://hub.docker.com/layers/mukeshravi/datahub_images/fe_image_latest
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - .
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/ardent-iris-389305/mukeshravi/datahub_images:fe_image_lates
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
 options:
   logging: NONE
 
