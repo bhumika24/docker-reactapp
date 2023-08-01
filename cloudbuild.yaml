@@ -1,17 +1,21 @@
 ---
 steps:
   - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
     args:
-      - build
-      - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
-      - .
+      - -c
+      - docker login --username=$$mukeshravi --password=$$Mukesh@97
+    secretEnv:
+      - mukeshravi
+      - Mukesh@97
   - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
     args:
-      - push
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
-options:
-  logging: NONE
-
-
-
+      - -c
+      - docker run $$mukeshravi/
+    secretEnv:
+      - mukeshravi
+availableSecrets:
+  secretManager:
+    - versionName: projects/ardent-iris-389305/secrets/docker-password/1/1
+      env: PASSWORD
