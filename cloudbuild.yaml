@@ -4,7 +4,7 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - echo $DOCKERHUB_PASSWORD | docker login -u $mukeshravi --password-stdin
+      - echo $Mukesh@97 | docker login -u $mukeshravi --password-stdin
     secretEnv:
       - mukeshravi
       - Mukesh@97
