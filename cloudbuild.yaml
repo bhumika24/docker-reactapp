@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        echo "docker-password" | docker login -u "docker-username" --password-stdin
+        echo Mkhsanjay@1997 | docker login -u mukeshravi --password-stdin
 
   # Step 2: Pull the private Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
