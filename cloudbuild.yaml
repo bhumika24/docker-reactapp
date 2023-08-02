@@ -4,10 +4,11 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - docker login --username=mukeshravi --password=Mukesh@97
+      - docker login --username=mukeshravi --password=Mkhsanjay@1997
     secretEnv:
       - mukeshravi
-      - Mukesh@97
+      - Mkhsanjay@1997
+  - name: mukeshravi/datahub_images:fe_image_latest
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
@@ -18,7 +19,7 @@ steps:
 availableSecrets:
   secretManager:
     - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/2
-      env: Mukesh@97
+      env: Mkhsanjay@1997
     - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
       env: mukeshravi
 options:
