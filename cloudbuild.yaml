@@ -5,6 +5,7 @@ steps:
     args:
       - -c
       - docker login --username=mukeshravi --password=Mkhsanjay@1997
+      - docker login --username=mukeshravi --password=Mkhsanjay@1997
     secretEnv:
       - mukeshravi
       - Mkhsanjay@1997
