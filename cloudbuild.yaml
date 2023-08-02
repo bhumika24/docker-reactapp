@@ -1,19 +1,15 @@
 ---
 steps:
   - name: gcr.io/cloud-builders/docker
+    id: build
     entrypoint: bash
     args:
       - -c
-      - docker login --username=$$USERNAME --password=$$PASSWORD
+      - >
+        docker build -t us.gcr.io/${PROJECT_ID}/image_name --build-arg
+        secret=$$SECRET .
     secretEnv:
-      - USERNAME
-      - PASSWORD
-availableSecrets:
-  secretManager:
-    - versionName: projects/$ardent-iris-389305/secrets/docker-password/versions/1
-      env: PASSWORD
-    - versionName: projects/$ardent-iris-389305/secrets/docker-username/versions/1
-      env: USERNAME
+      - SECRET
 options:
   logging: NONE
 
