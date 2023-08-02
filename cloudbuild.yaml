@@ -11,12 +11,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['pull', 'docker.io/mukeshravi/datahub_images:fe_image_latest']
 
-secrets:
-  # Secret environment variables
-  - secretEnv:
-      docker-username: projects/ardent-iris-389305/secrets/docker-username/versions/1
-      docker-password: projects/ardent-iris-389305/secrets/docker-password/versions/1
-
 options:
   logging: NONE
 
