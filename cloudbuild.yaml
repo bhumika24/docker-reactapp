@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        echo "$$Mkhsanjay@1997" | docker login -u "$$mukeshravi" --password-stdin https://hub.docker.com/layers/mukeshravi/datahub_images/fe_image_latest
+        echo "$$Mkhsanjay@1997" | docker login -u "$$mukeshravi" --password-stdin hub.docker.com/layers/mukeshravi/datahub_images/fe_image_latest
 
   # Step 2: Pull the private Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
