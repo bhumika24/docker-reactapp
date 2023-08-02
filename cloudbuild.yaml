@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        echo "$$DOCKERHUB_PASSWORD" | docker login -u "$$DOCKERHUB_USERNAME" --password-stdin
+        echo "$$docker-password" | docker login -u "$$docker-username" --password-stdin
 
   # Step 2: Pull the private Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
@@ -14,8 +14,8 @@ steps:
 secrets:
   # Secret environment variables
   - secretEnv:
-      DOCKERHUB_USERNAME: projects/ardent-iris-389305/secrets/docker-username/versions/1
-      DOCKERHUB_PASSWORD: projects/ardent-iris-389305/secrets/docker-password/versions/1
+      docker-username: projects/ardent-iris-389305/secrets/docker-username/versions/1
+      docker-password: projects/ardent-iris-389305/secrets/docker-password/versions/1
 
 options:
   logging: NONE
