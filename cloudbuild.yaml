@@ -1,15 +1,25 @@
----
 steps:
-  - name: gcr.io/cloud-builders/docker
-    id: build
-    entrypoint: bash
+  # Step 1: Authenticate with Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
     args:
-      - -c
-      - >
-        docker build -t us.gcr.io/${PROJECT_ID}/image_name --build-arg
-        secret=$$SECRET .
-    secretEnv:
-      - SECRET
+      - '-c'
+      - |
+        echo "$$DOCKERHUB_PASSWORD" | docker login -u "$$DOCKERHUB_USERNAME" --password-stdin
+
+  # Step 2: Pull the private Docker image from Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'docker.io/mukeshravi/datahub_images:fe_image_latest']
+
+secrets:
+  # Secret environment variables
+  - name: 'DOCKERHUB_USERNAME'
+    secretManager:
+      versionName: 'projects/ardent-iris-389305/secrets/docker-username/versions/1'
+  - name: 'DOCKERHUB_PASSWORD'
+    secretManager:
+      versionName: 'projects/ardent-iris-389305/secrets/docker-password/versions/1'
+
 options:
   logging: NONE
 
