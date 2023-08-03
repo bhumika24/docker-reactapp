@@ -1,16 +1,25 @@
+ ---
 steps:
-  # Authenticate to Docker Hub
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['login', '-u', 'mukeshravi', '-p', 'Mkhsanjay@1997']
-
-  # Pull the desired Docker image from Docker Hub
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['pull', 'mukeshravi/mukeshravi/datahub_images:fe_image_latest']
-
-  # Push the pulled image to Google Cloud Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
     args:
-      - 'push'
-      - 'me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage'
+      - -c
+      - docker login --username=mukeshravi --password=Mukesh@97
+    secretEnv:
+      - mukeshravi
+      - Mukesh@97
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker run mukeshravi/datahub_images:fe_image_latest
+    secretEnv:
+      - mukeshravi
+availableSecrets:
+  secretManager:
+    - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/2
+      env: Mukesh@97
+    - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
+      env: mukeshravi
 options:
   logging: NONE
