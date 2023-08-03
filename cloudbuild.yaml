@@ -6,10 +6,11 @@ steps:
   # Pull the desired Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
     args: ['pull', 'mukeshravi/mukeshravi/datahub_images:fe_image_latest']
-    
-  - name: gcr.io/cloud-builders/docker
+
+  # Push the pulled image to Google Cloud Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
     args:
-      - push
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
-  options:
-    logging: NONE
+      - 'push'
+      - 'me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage'
+    options:
+      logging: NONE
