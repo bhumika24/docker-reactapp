@@ -4,22 +4,33 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - docker login --username=mukeshravi --password=Mukesh@97
-    secretEnv:
-      - mukeshravi
-      - Mukesh@97
+      - docker login -u "$$docker-username" -p "$$docker-password"
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker run mukeshravi/datahub_images:fe_image_latest
-    secretEnv:
-      - mukeshravi
-availableSecrets:
-  secretManager:
-    - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/2
-      env: Mukesh@97
-    - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
-      env: mukeshravi
+      - docker pull mukeshravi/datahub_images:pgdb_image_latest
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker pull mukeshravi/datahub_images:be_image_latest
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker pull mukeshravi/datahub_images:fe_image_latest
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - .
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker push
+        me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
 options:
   logging: NONE
