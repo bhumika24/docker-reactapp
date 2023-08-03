@@ -1,17 +1,15 @@
 steps:
-  # Step 1: Authenticate with Docker Hub
+  # Authenticate to Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
+    args: ['login', '-u', 'mukeshravi', '-p', 'Mkhsanjay@1997']
+
+  # Pull the desired Docker image from Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'mukeshravi/mukeshravi/datahub_images:fe_image_latest']
+    
+  - name: gcr.io/cloud-builders/docker
     args:
-      - '-c'
-      - |
-        echo "Mkhsanjay@1997" | docker login -u "mukeshravi" --password-stdin
-
-  # Step 2: Pull the private Docker image from Docker Hub
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['pull', 'docker.io/mukeshravi/datahub_images:fe_image_latest']
-
-options:
-  logging: NONE
-
-
+      - push
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+  options:
+    logging: NONE
