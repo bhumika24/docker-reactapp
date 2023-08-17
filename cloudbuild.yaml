@@ -4,17 +4,42 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - docker login -u "mukeshravi" -p "Mkhsanjay@1997"
+      - docker login --username="$$USERNAME" --password="$$PASSWORD"
+    secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
       - docker pull mukeshravi/datahub_images:pgdb_image_latest
   - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/pg_datahub-image
+      - .
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker push us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/pg_datahub-image
+    secretEnv: ['USERNAME', 'PASSWORD']
+  - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
       - docker pull mukeshravi/datahub_images:be_image_latest
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/be_datahub-image
+      - .
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - docker push us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/be_datahub-image
+    secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
@@ -24,13 +49,28 @@ steps:
     args:
       - build
       - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/fe_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push
-        me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/myimage
+      - docker push us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/fe_datahub-image
+    secretEnv: ['USERNAME', 'PASSWORD']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'ssh', 'datahub-pub-0', '--zone', 'us-east1-b', '--command', 'echo "Logged in to VM"']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'ssh', 'datahub-pub-0', '--zone', 'us-east1-b',  '--command', 'sudo apt-get -y autoremove && sudo apt-get update && sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && apt-cache policy docker-ce && sudo apt install -y docker-ce']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'ssh', 'datahub-pub-0', '--zone', 'us-east1-b', '--command', 'docker image pull us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/fe_datahub-image']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['compute', 'ssh', 'datahub-pub-0', '--zone', 'us-east1-b', '--command', 'docker image run -d -p 80:80 us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/fe_datahub-image']
+timeout: '600s' 
+availableSecrets:
+  secretManager:
+  - versionName: projects/nifty-vault-372307/secrets/DOCKER_PASSWORD/versions/1
+    env: 'PASSWORD'
+  - versionName: projects/nifty-vault-372307/secrets/DOCKER_USERNAME/versions/1
+    env: 'USERNAME'
 options:
   logging: CLOUD_LOGGING_ONLY
