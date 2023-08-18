@@ -15,13 +15,13 @@ steps:
     args:
       - build
       - -t
-      - us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/pg_datahub-image
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/pg_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/pg_datahub-image
+      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/pg_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
@@ -32,13 +32,13 @@ steps:
     args:
       - build
       - -t
-      - us-central1-docker.pkg.dev/nifty-vault-372307/gcf-artifacts/be_datahub-image
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/be_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/be_datahub-image
+      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/be_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
@@ -49,13 +49,13 @@ steps:
     args:
       - build
       - -t
-      - us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/fe_datahub-image
+      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/fe_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/fe_datahub-image
+      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/fe_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['compute', 'ssh', 'datahub-pub-0', '--zone', 'us-east1-b', '--command', 'echo "Logged in to VM"']
