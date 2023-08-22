@@ -68,9 +68,9 @@ steps:
 timeout: '600s' 
 availableSecrets:
   secretManager:
-  - versionName: projects/ardent-iris-389305/secrets/DOCKER_PASSWORD/versions/1
+  - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/1
     env: 'PASSWORD'
-  - versionName: projects/ardent-iris-389305/secrets/DOCKER_USERNAME/versions/1
+  - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
     env: 'USERNAME'
 options:
   logging: CLOUD_LOGGING_ONLY
