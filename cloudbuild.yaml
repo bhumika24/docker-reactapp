@@ -15,13 +15,13 @@ steps:
     args:
       - build
       - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/pg_datahub-image
+      - us-central1-docker.pkg.dev/dm-solutions/doc-registry/pg_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/pg_datahub-image
+      - docker push us-central1-docker.pkg.dev/dm-solutions/doc-registry/pg_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
@@ -32,13 +32,13 @@ steps:
     args:
       - build
       - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/be_datahub-image
+      - us-central1-docker.pkg.dev/dm-solutions/doc-registry/be_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/be_datahub-image
+      - docker push us-central1-docker.pkg.dev/dm-solutions/doc-registry/be_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
@@ -49,28 +49,28 @@ steps:
     args:
       - build
       - -t
-      - me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/fe_datahub-image
+      - us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image
       - .
   - name: gcr.io/cloud-builders/docker
     entrypoint: bash
     args:
       - -c
-      - docker push me-central1-docker.pkg.dev/ardent-iris-389305/gcp-azure-pipeline/fe_datahub-image
+      - docker push us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image
     secretEnv: ['USERNAME', 'PASSWORD']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'datahub-pub-1', '--zone', 'us-east1-b', '--command', 'echo "Logged in to VM"']
+    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'echo "Logged in to VM"']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'datahub-pub-1', '--zone', 'us-east1-b',  '--command', 'sudo apt-get -y autoremove && sudo apt-get update && sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && apt-cache policy docker-ce && sudo apt install -y docker-ce']
+    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a',  '--command', 'sudo apt-get -y autoremove && sudo apt-get update && sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && apt-cache policy docker-ce && sudo apt install -y docker-ce']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'datahub-pub-1', '--zone', 'us-east1-b', '--command', 'docker image pull us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/fe_datahub-image']
+    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'docker image pull us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'datahub-pub-1', '--zone', 'us-east1-b', '--command', 'docker image run -d -p 80:80 us-central1-docker.pkg.dev/ardent-iris-389305/gcf-artifacts/fe_datahub-image']
+    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'docker image run -d -p 80:80 us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image']
 timeout: '600s' 
 availableSecrets:
   secretManager:
-  - versionName: projects/ardent-iris-389305/secrets/docker-password/versions/1
+  - versionName: projects/dm-solutions/secrets/doc-password/versions/1
     env: 'PASSWORD'
-  - versionName: projects/ardent-iris-389305/secrets/docker-username/versions/1
+  - versionName: projects/dm-solutions/secrets/doc-username/versions/1
     env: 'USERNAME'
 options:
   logging: CLOUD_LOGGING_ONLY
