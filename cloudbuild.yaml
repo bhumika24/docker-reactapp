@@ -64,7 +64,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'docker image pull us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'docker image run -d -p 80:80 us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image']
+    args: ['compute', 'ssh', 'test-deployment', '--zone', 'us-central1-a', '--command', 'docker run -d -p 80:80 us-central1-docker.pkg.dev/dm-solutions/doc-registry/fe_datahub-image']
 timeout: '600s' 
 availableSecrets:
   secretManager:
